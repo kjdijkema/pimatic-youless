@@ -1,4 +1,4 @@
-# #Plugin template
+# #Plugin pimatic-youless
 
 # This is an plugin template and mini tutorial for creating pimatic plugins. It will explain the 
 # basics of how the plugin system works and how a plugin should look like.
