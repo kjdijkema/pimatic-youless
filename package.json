@@ -1,20 +1,20 @@
-{ "name": "pimatic-plugin-template",
-  "description": "The plugin description",
-  "author": "Your Name <you@example.com> (http://your-website)",
-  "main": "my-plugin",
+{ "name": "pimatic-youless",
+  "description": "Uitlezen van de Youless Energy monitor en waarden tonen in pimatic",
+  "author": "kjdijkema <k.j.dijkema@gmail.com> (http://dijkema-design.nl)",
+  "main": "pimatic-youless",
   "files": [
-    "my-plugin.coffee",
+    "pimatic-youless.coffee",
     "README.md",
-    "my-plugin-config-schema.coffee"
+    "pimatic-youless-config-schema.coffee"
   ],
   "version": "0.8.0",
-  "homepage": "http://your-plugin-website",
+  "homepage": "http://dijkema-design.nl/pimatic-youless",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/pimatic/pimatic-plugin-template.git"
+    "url": "git://github.com/kjdijkema/pimatic-youless.git"
   },
-  "configSchema": "my-plugin-config-schema.coffee",
+  "configSchema": "pimatic-youless-config-schema.coffee",
   "dependencies": {
   },
   "peerDependencies": {
