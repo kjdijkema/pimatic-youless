@@ -7,13 +7,17 @@
     "README.md",
     "pimatic-youless-config-schema.coffee"
   ],
-  "version": "0.8.0",
+  "version": "0.1",
   "homepage": "http://dijkema-design.nl/pimatic-youless",
   "private": true,
   "repository": {
     "type": "git",
     "url": "git://github.com/kjdijkema/pimatic-youless.git"
   },
+  "bugs": {
+    "url" : "http://github.com/kjdijkema/pimatic-youless/issues",
+    "email" : "pimatic-youless@dijkema-design.nl"
+  },  
   "configSchema": "pimatic-youless-config-schema.coffee",
   "dependencies": {
   },
