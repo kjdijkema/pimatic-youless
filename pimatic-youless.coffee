@@ -17,30 +17,58 @@ module.exports = (env) ->
   # Require the  bluebird promise library
   Promise = env.require 'bluebird'
 
+  convict = env.require "convict"  
+
   # Require the [cassert library](https://github.com/rhoot/cassert).
   assert = env.require 'cassert'
 
-  # Include you own depencies with nodes global require function:
-  #  
-  #     someThing = require 'someThing'
-  #  
-
-  # ###MyPlugin class
-  # Create a class that extends the Plugin class and implements the following functions:
   class Youless extends env.plugins.Plugin
 
-    # ####init()
-    # The `init` function is called by the framework to ask your plugin to initialise.
-    #  
-    # #####params:
-    #  * `app` is the [express] instance the framework is using.
-    #  * `framework` the framework itself
-    #  * `config` the properties the user specified as config for your plugin in the `plugins` 
-    #     section of the config.json file 
-    #     
-    # 
     init: (app, @framework, @config) =>
-      env.logger.info("Hello World")
+      #env.logger.info("Started Youless plugin")
+
+      deviceConfigDef = require("./device-config-schema")
+
+      @framework.deviceManager.registerDeviceClass("Youlessdevice", {
+        configDef: deviceConfigDef.Youlessdevice,
+        createCallback: (config) => new Youlessdevice(config)
+      })      
+
+  class Youlessdevice extends env.devices.Device
+
+    attributes:
+      usage:
+        description: "Actual usage"
+        type: "number"
+        unit: ' Watt'
+
+    usage: 0.0
+
+    constructor: (@config) ->
+      @id = config.id
+      @ip = config.ip
+      @name = config.name
+      @timeout = config.timeout
+      super()
+
+      @requestUsage()
+      setInterval( =>
+        @requestUsage()
+      , @timeout
+      )
+
+    # requestUsage: () =>
+    #   youlessLib.find
+    #     search: @ip
+    #   , (err, result) =>
+    #     env.logger.error("Error retrieving Youless data") if err
+    #     if result
+    #       @emit "usage", Number result[0].current.usage
+
+    requestUsage: () =>
+      @emit "usage", Number 33          
+
+    getUsage: -> Promise.resolve @usage
 
   # ###Finally
   # Create a instance of my plugin
