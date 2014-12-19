@@ -1,31 +1,14 @@
 # #Plugin pimatic-youless
 
-# This is an plugin template and mini tutorial for creating pimatic plugins. It will explain the 
-# basics of how the plugin system works and how a plugin should look like.
-
-# ##The plugin code
-
-# Your plugin must export a single function, that takes one argument and returns a instance of
-# your plugin class. The parameter is an envirement object containing all pimatic related functions
-# and classes. See the [startup.coffee](http://sweetpi.de/pimatic/docs/startup.html) for details.
 module.exports = (env) ->
 
-  # ###require modules included in pimatic
-  # To require modules that are included in pimatic use `env.require`. For available packages take 
-  # a look at the dependencies section in pimatics package.json
-
-  # Require the  bluebird promise library
   Promise = env.require 'bluebird'
-
-  convict = env.require "convict"  
-
-  # Require the [cassert library](https://github.com/rhoot/cassert).
+  
   assert = env.require 'cassert'
 
   class Youless extends env.plugins.Plugin
 
-    init: (app, @framework, @config) =>
-      #env.logger.info("Started Youless plugin")
+    init: (app, @framework, @config) =>      
 
       deviceConfigDef = require("./device-config-schema")
 
@@ -37,12 +20,17 @@ module.exports = (env) ->
   class Youlessdevice extends env.devices.Device
 
     attributes:
-      usage:
+      actualusage:
         description: "Actual usage"
         type: "number"
         unit: ' Watt'
+      counter:
+        description: "Total energy count"
+        type: "number"
+        unit: ' kWh'
 
-    usage: 0.0
+    actualusage: 0.0
+    counter: 0.0
 
     constructor: (@config) ->
       @id = config.id
@@ -51,27 +39,45 @@ module.exports = (env) ->
       @timeout = config.timeout
       super()
 
-      @requestUsage()
+
+      @requestData()
       setInterval( =>
-        @requestUsage()
+        @requestData()
       , @timeout
       )
 
-    # requestUsage: () =>
-    #   youlessLib.find
-    #     search: @ip
-    #   , (err, result) =>
-    #     env.logger.error("Error retrieving Youless data") if err
-    #     if result
-    #       @emit "usage", Number result[0].current.usage
+    http = require "http"
 
-    requestUsage: () =>
-      @emit "usage", Number 33          
+    data = 
+        actualusage : ""
+        counter : ""
 
-    getUsage: -> Promise.resolve @usage
+    fetchData = (host, path, callback) ->
+      options = 
+          host: host
+          path: path
+      req = http.get options, (res) ->
+          contents = ""
+          res.on 'data', (chunk) ->
+              contents += "#{chunk}"
+          res.on 'end', () ->
+              contents = JSON.parse contents
+              data.actualusage = contents.pwr
+              data.counter = contents.cnt  
+          req.on "error", (e) ->
+              env.logger.error("Error retrieving Youless data")      
 
-  # ###Finally
-  # Create a instance of my plugin
+
+    requestData: () =>
+      fetchData @ip,"/a?f=j.html"
+      splittedcounter = data.counter.split(",")
+      counter = splittedcounter[0]    
+      @emit "actualusage", Number data.actualusage
+      @emit "counter", Number counter
+   
+
+    getActualusage: -> Promise.resolve @actualusage
+    getCounter: -> Promise.resolve @counter
+
   plugin = new Youless
-  # and return it to the framework.
   return plugin

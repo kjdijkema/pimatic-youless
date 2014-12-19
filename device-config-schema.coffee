@@ -11,6 +11,6 @@ module.exports ={
       timeout:
         description: "Timeout between requests"
         format: Number
-        default: "60000"
+        default: "60000"      
   }
 }  
