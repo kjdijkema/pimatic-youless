@@ -1,0 +1,94 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'publish', './' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose node symlink /usr/bin/node
+5 verbose publish [ './' ]
+6 verbose cache add [ './', null ]
+7 verbose cache add name=undefined spec="./" args=["./",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: './',
+8 verbose parsed url   path: './',
+8 verbose parsed url   href: './' }
+9 silly lockFile 0ee6c175- ./
+10 verbose lock ./ /home/kjdijkema/.npm/0ee6c175-.lock
+11 verbose tar pack [ '/home/kjdijkema/.npm/pimatic-youless/0.1.0/package.tgz',
+11 verbose tar pack   './' ]
+12 verbose tarball /home/kjdijkema/.npm/pimatic-youless/0.1.0/package.tgz
+13 verbose folder ./
+14 info prepublish pimatic-youless@0.1.0
+15 silly lockFile 04cb2bca-tar tar://./
+16 verbose lock tar://./ /home/kjdijkema/.npm/04cb2bca-tar.lock
+17 silly lockFile 5002d477-imatic-youless-0-1-0-package-tgz tar:///home/kjdijkema/.npm/pimatic-youless/0.1.0/package.tgz
+18 verbose lock tar:///home/kjdijkema/.npm/pimatic-youless/0.1.0/package.tgz /home/kjdijkema/.npm/5002d477-imatic-youless-0-1-0-package-tgz.lock
+19 silly lockFile 04cb2bca-tar tar://./
+20 silly lockFile 04cb2bca-tar tar://./
+21 silly lockFile 5002d477-imatic-youless-0-1-0-package-tgz tar:///home/kjdijkema/.npm/pimatic-youless/0.1.0/package.tgz
+22 silly lockFile 5002d477-imatic-youless-0-1-0-package-tgz tar:///home/kjdijkema/.npm/pimatic-youless/0.1.0/package.tgz
+23 silly lockFile 9bc85d04-pm-pimatic-youless-0-1-0-package /home/kjdijkema/.npm/pimatic-youless/0.1.0/package
+24 verbose lock /home/kjdijkema/.npm/pimatic-youless/0.1.0/package /home/kjdijkema/.npm/9bc85d04-pm-pimatic-youless-0-1-0-package.lock
+25 silly lockFile 9bc85d04-pm-pimatic-youless-0-1-0-package /home/kjdijkema/.npm/pimatic-youless/0.1.0/package
+26 silly lockFile 9bc85d04-pm-pimatic-youless-0-1-0-package /home/kjdijkema/.npm/pimatic-youless/0.1.0/package
+27 silly lockFile 0ee6c175- ./
+28 silly lockFile 0ee6c175- ./
+29 silly publish { name: 'pimatic-youless',
+29 silly publish   description: 'Reading Youless Energy monitor and showing values in pimatic',
+29 silly publish   author:
+29 silly publish    { name: 'kjdijkema',
+29 silly publish      email: 'k.j.dijkema@gmail.com',
+29 silly publish      url: 'http://dijkema-design.nl' },
+29 silly publish   main: 'pimatic-youless',
+29 silly publish   files:
+29 silly publish    [ 'pimatic-youless.coffee',
+29 silly publish      'README.md',
+29 silly publish      'pimatic-youless-config-schema.coffee',
+29 silly publish      'device-config-schema.coffee' ],
+29 silly publish   version: '0.1.0',
+29 silly publish   homepage: 'http://dijkema-design.nl/pimatic-youless',
+29 silly publish   private: true,
+29 silly publish   repository:
+29 silly publish    { type: 'git',
+29 silly publish      url: 'git://github.com/kjdijkema/pimatic-youless.git' },
+29 silly publish   bugs:
+29 silly publish    { url: 'http://github.com/kjdijkema/pimatic-youless/issues',
+29 silly publish      email: 'pimatic-youless@dijkema-design.nl' },
+29 silly publish   configSchema: 'pimatic-youless-config-schema.coffee',
+29 silly publish   dependencies: {},
+29 silly publish   peerDependencies: { pimatic: '0.8.*' },
+29 silly publish   engines: { node: '>0.8.x', npm: '>1.1.x' },
+29 silly publish   readme: 'pimatic-youless\n===============\n\nReading Youless Energy monitor and showing values in pimatic\n\nv0.4 Error handling added\n\n\nConfiguration\n-------------\nAdd the plugin to the plugin section of your config.json:\n\n    {\n      "plugin": "youless"\n    }\n\nAdd a device to the devices section:\n\n    {\n      "id": "youless",\n      "name": "Energy consumption",\n      "class": "Youlessdevice",\n      "ip": "10.0.0.14",\n      "timeout": 60000\n    }\n\nip = IP-address of your Youless device\n\ntimeout = time between readings in milliseconds\n\nMake sure your Youless is not password-protected.',
+29 silly publish   readmeFilename: 'README.md',
+29 silly publish   gitHead: '8d342232717f5233b1697c9a78b31baec28b9b1b',
+29 silly publish   _id: 'pimatic-youless@0.1.0',
+29 silly publish   scripts: {},
+29 silly publish   _shasum: '0d420a8dd35087382bfbc992c2e7d3a92830d4ea',
+29 silly publish   _from: './' }
+30 error Error: This package has been marked as private
+30 error Remove the 'private' field from the package.json to publish it.
+30 error     at publish_ (/usr/lib/node_modules/npm/lib/publish.js:91:31)
+30 error     at Array.1 (/usr/lib/node_modules/npm/node_modules/slide/lib/bind-actor.js:15:8)
+30 error     at LOOP (/usr/lib/node_modules/npm/node_modules/slide/lib/chain.js:15:14)
+30 error     at LOOP (/usr/lib/node_modules/npm/node_modules/slide/lib/chain.js:14:28)
+30 error     at chain (/usr/lib/node_modules/npm/node_modules/slide/lib/chain.js:20:5)
+30 error     at /usr/lib/node_modules/npm/lib/publish.js:57:5
+30 error     at /usr/lib/node_modules/npm/node_modules/inflight/inflight.js:22:7
+30 error     at Array.forEach (native)
+30 error     at res (/usr/lib/node_modules/npm/node_modules/inflight/inflight.js:21:9)
+30 error     at f (/usr/lib/node_modules/npm/node_modules/once/once.js:16:25)
+31 error If you need help, you may report this *entire* log,
+31 error including the npm and node versions, at:
+31 error     <http://github.com/npm/npm/issues>
+32 error System Linux 3.13.0-43-generic
+33 error command "/usr/bin/node" "/usr/bin/npm" "publish" "./"
+34 error cwd /home/kjdijkema/pimatic-dev/node_modules/pimatic-youless
+35 error node -v v0.10.33
+36 error npm -v 1.4.28
+37 verbose exit [ 1, true ]

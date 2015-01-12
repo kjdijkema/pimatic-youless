@@ -68,14 +68,15 @@ module.exports = (env) ->
               data.actualusage = contents.pwr
               data.counter = contents.cnt  
           res.on 'error', (err) ->    
-              env.logger.error(err.message) 
-      req.on 'socket', (socket) ->
-          socket.setTimeout(30000)
-          socket.on 'timeout', () ->    
-              env.logger.error("Timeout retrieving Youless data")    
-              req.abort
-               
+              env.logger.error(err.message)  
+      req.on 'error', (err) ->
+          if err.code == 'ETIMEDOUT' 
+              env.logger.error("Timeout retrieving Youless data")
+          else 
+              env.logger.error("Error retrieving Youless data")  
 
+    
+               
     requestData: () =>
       fetchData @ip,"/a?f=j"
       splittedcounter = data.counter.split(",")
