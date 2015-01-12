@@ -25,6 +25,7 @@ Add a device to the devices section:
     }
 
 ip = IP-address of your Youless device
+
 timeout = time between readings in milliseconds
 
 Make sure your Youless is not password-protected.
