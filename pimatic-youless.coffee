@@ -61,15 +61,23 @@ module.exports = (env) ->
           res.on 'data', (chunk) ->
               contents += "#{chunk}"
           res.on 'end', () ->
-              contents = JSON.parse contents
+              try contents = JSON.parse contents
+              catch e 
+                env.logger.error("Error retrieving Youless data") 
+                return false 
               data.actualusage = contents.pwr
               data.counter = contents.cnt  
-          req.on "error", (e) ->
-              env.logger.error("Error retrieving Youless data")      
-
+          res.on 'error', (err) ->    
+              env.logger.error(err.message) 
+      req.on 'socket', (socket) ->
+          socket.setTimeout(30000)
+          socket.on 'timeout', () ->    
+              env.logger.error("Timeout retrieving Youless data")    
+              req.abort
+               
 
     requestData: () =>
-      fetchData @ip,"/a?f=j.html"
+      fetchData @ip,"/a?f=j"
       splittedcounter = data.counter.split(",")
       counter = splittedcounter[0]    
       @emit "actualusage", Number data.actualusage

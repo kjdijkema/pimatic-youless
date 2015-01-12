@@ -3,7 +3,7 @@ pimatic-youless
 
 Reading Youless Energy monitor and showing values in pimatic
 
-v0.3 first working protoype. No error handling.
+v0.4 Error handling added
 
 
 Configuration
@@ -27,3 +27,4 @@ Add a device to the devices section:
 ip = IP-address of your Youless device
 timeout = time between readings in milliseconds
 
+Make sure your Youless is not password-protected.
