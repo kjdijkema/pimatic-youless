@@ -1,4 +1,4 @@
-module.exports ={
+module.exports = {
   title: "pimatic-youless device config schemas"
   Youlessdevice: {
     title: "Youlessdevice config options"
@@ -13,4 +13,4 @@ module.exports ={
         format: Number
         default: "60000"      
   }
-}  
+} 
