@@ -3,9 +3,9 @@
 module.exports = (env) ->
 
   Promise = env.require 'bluebird'
-  
   assert = env.require 'cassert'
-
+  http = require "http"
+  
   class Youless extends env.plugins.Plugin
 
     init: (app, @framework, @config) =>      
@@ -46,43 +46,45 @@ module.exports = (env) ->
       , @timeout
       )
 
-    http = require "http"
-
-    data = 
-        actualusage : ""
-        counter : ""
+    
 
     fetchData = (host, path, callback) ->
+      data = 
+        actualusage : ""
+        counter : ""
       options = 
-          host: host
-          path: path
+        host: host
+        path: path
       req = http.get options, (res) ->
-          contents = ""
-          res.on 'data', (chunk) ->
-              contents += "#{chunk}"
-          res.on 'end', () ->
-              try contents = JSON.parse contents
-              catch e 
-                env.logger.error("Error retrieving Youless data") 
-                return false 
-              data.actualusage = contents.pwr
-              data.counter = contents.cnt  
-          res.on 'error', (err) ->    
-              env.logger.error(err.message)  
+        contents = ""
+        res.on 'data', (chunk) ->
+            contents += "#{chunk}"
+        res.on 'end', () ->
+            try contents = JSON.parse contents
+            catch e 
+              env.logger.error("Error retrieving Youless data") 
+              return false 
+            data.actualusage = contents.pwr
+            data.counter = contents.cnt
+            callback(data)
+        res.on 'error', (err) ->    
+            env.logger.error(err.message)  
       req.on 'error', (err) ->
           if err.code == 'ETIMEDOUT' 
               env.logger.error("Timeout retrieving Youless data")
           else 
-              env.logger.error("Error retrieving Youless data")  
+              env.logger.error("Error retrieving Youless data: #{err}")  
 
     
                
     requestData: () =>
-      fetchData @ip,"/a?f=j"
-      splittedcounter = data.counter.split(",")
-      counter = splittedcounter[0]    
-      @emit "actualusage", Number data.actualusage
-      @emit "counter", Number counter
+      fetchData @ip,"/a?f=j", (data) =>
+        splittedcounter = data.counter.split(",")
+        counter = splittedcounter[0]
+        @actualusage = Number data.actualusage
+        @counter = Number counter
+        @emit "actualusage", @actualusage
+        @emit "counter", @counter
    
 
     getActualusage: -> Promise.resolve @actualusage
