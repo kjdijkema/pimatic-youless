@@ -33,10 +33,10 @@ module.exports = (env) ->
     counter: 0.0
 
     constructor: (@config) ->
-      @id = config.id
-      @ip = config.ip
-      @name = config.name
-      @timeout = config.timeout
+      @id = @config.id
+      @ip = @config.ip
+      @name = @config.name
+      @timeout = @config.timeout
       super()
 
 
