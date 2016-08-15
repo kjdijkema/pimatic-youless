@@ -8,7 +8,7 @@
     "pimatic-youless-config-schema.coffee",
     "device-config-schema.coffee"
   ],
-  "version": "0.4.2",
+  "version": "0.5",
   "homepage": "http://dijkema-design.nl/pimatic-youless",
   "private": false,
   "repository": {
