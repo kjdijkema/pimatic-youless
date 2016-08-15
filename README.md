@@ -3,7 +3,7 @@ pimatic-youless
 
 Reading Youless Energy monitor and showing values in pimatic
 
-v0.4.2
+v0.5 (should now work with pimatic v0.9)
 
 
 Configuration
