@@ -1,4 +1,5 @@
-{ "name": "pimatic-youless",
+{
+  "name": "pimatic-youless",
   "description": "Reading Youless Energy monitor and showing values in pimatic",
   "author": "kjdijkema <k.j.dijkema@gmail.com> (http://dijkema-design.nl)",
   "main": "pimatic-youless",
@@ -8,7 +9,7 @@
     "pimatic-youless-config-schema.coffee",
     "device-config-schema.coffee"
   ],
-  "version": "0.5",
+  "version": "0.5.0",
   "homepage": "http://dijkema-design.nl/pimatic-youless",
   "private": false,
   "repository": {
@@ -16,17 +17,16 @@
     "url": "git://github.com/kjdijkema/pimatic-youless.git"
   },
   "bugs": {
-    "url" : "http://github.com/kjdijkema/pimatic-youless/issues",
-    "email" : "pimatic-youless@dijkema-design.nl"
-  },  
-  "configSchema": "pimatic-youless-config-schema.coffee",
-  "dependencies": {
+    "url": "http://github.com/kjdijkema/pimatic-youless/issues",
+    "email": "pimatic-youless@dijkema-design.nl"
   },
+  "configSchema": "pimatic-youless-config-schema.coffee",
+  "dependencies": {},
   "peerDependencies": {
     "pimatic": ">=0.8.0 <1.0.0"
   },
   "engines": {
-    "node": ">0.8.x",
+    "node": ">= 4",
     "npm": ">1.1.x"
   }
 }
